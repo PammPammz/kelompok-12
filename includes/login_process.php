@@ -2,12 +2,25 @@
 session_start();
 require_once 'config.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // buat perilaku ketika salah username atau password
-    // buat perilaku ketika username tidak ditemukan
-    // buat perilaku ketika password salah
-    // buat perilaku ketika login berhasil
-    // buat perilaku ketika login gagal
-    // buat perilaku ketika login berhasil  
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Fetch user by username
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->execute([$username]);
+$user = $stmt->fetch();
+
+if ($user && password_verify($password, $user['password'])) {
+    // Login successful, set session
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['role'] = $user['role'];
+
+    header("Location: ../dashboard.php"); // Redirect to protected area
+    exit;
+} else {
+    $error = "Username atau password salah.";
+    header("Location: ../login.php?error=" . urlencode($error));
+    exit;
 }
-?> 
+?>

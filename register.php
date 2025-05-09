@@ -11,9 +11,9 @@
         <div class="form-container">
             <h2>Registrasi</h2>
             <?php
-            if (isset($error)) {
-                echo '<div class="error-message">' . $error . '</div>';
-            }
+                if (isset($_GET['error'])) {
+                    echo '<div class="error-message">' . htmlspecialchars($_GET['error']) . '</div>';
+                }
             ?>
             <form action="includes/register_process.php" method="POST">
                 <div class="form-group">
@@ -38,4 +38,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
