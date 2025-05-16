@@ -39,7 +39,7 @@ $isAdmin = ($role === 'admin');
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 21px;
         }
 
         /* Dashboard Form Container */
