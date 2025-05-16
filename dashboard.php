@@ -21,52 +21,118 @@ $isAdmin = ($role === 'admin');
     <title>Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        .dashboard-container {
-            text-align: center;
+        /* General Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('assets/images/foto1.jpg');
+            background-size: cover; 
+            background-position: center center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Container for the whole page */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
         }
-        .welcome-message {
+
+        /* Dashboard Form Container */
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        /* Heading */
+        h2 {
+            font-size: 30px;
+            color: #333;
             margin-bottom: 20px;
         }
-        .logout-btn {
+
+        .welcome-message {
+            margin-bottom: 30px;
+        }
+
+        /* Button Styling */
+        .logout-btn, .admin-btn, .user-btn {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #f44336;
+            padding: 12px 24px;
+            background-color: #007bff;
             color: white;
             text-decoration: none;
-            border-radius: 4px;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
             margin-top: 10px;
         }
+
+        .admin-btn:hover, .user-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .logout-btn {
+            background-color: red;
+        }
+
         .logout-btn:hover {
-            background-color: #d32f2f;
+            background-color: #8B0000;
         }
+
+        /* Admin Panel Styling */
         .admin-panel {
-            background-color: #e3f2fd;
+            background-color: #e9f7fd;
             padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .admin-panel h3 {
-            color: #1976d2;
+            font-size: 24px;
+            color: #007bff;
             margin-bottom: 15px;
         }
-        .admin-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #2196f3;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 5px;
+
+        /* User Panel Styling */
+        .user-panel {
+            margin-top: 30px;
         }
-        .admin-btn:hover {
-            background-color: #1976d2;
+
+        .user-panel p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .admin-btn, .user-btn {
+            margin: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+
+            .welcome-message p {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="form-container dashboard-container">
+        <div class="form-container">
             <h2>Selamat Datang</h2>
             <div class="welcome-message">
                 <p>Halo, <?= htmlspecialchars($username) ?></p>
@@ -75,6 +141,7 @@ $isAdmin = ($role === 'admin');
             </div>
 
             <?php if ($isAdmin): ?>
+            <!-- Admin Panel -->
             <div class="admin-panel">
                 <h3>Admin Panel</h3>
                 <a href="#" class="admin-btn">Kelola User</a>
@@ -82,13 +149,15 @@ $isAdmin = ($role === 'admin');
                 <a href="#" class="admin-btn">Pengaturan</a>
             </div>
             <?php else: ?>
+            <!-- User Panel -->
             <div class="user-panel">
                 <p>Selamat datang di dashboard user.</p>
-                <a href="#" class="admin-btn">Profil Saya</a>
-                <a href="#" class="admin-btn">Ubah Password</a>
+                <a href="#" class="user-btn">Profil Saya</a>
+                <a href="#" class="user-btn">Ubah Password</a>
             </div>
             <?php endif; ?>
 
+            <!-- Logout Button -->
             <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </div>
